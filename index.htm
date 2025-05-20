@@ -6,46 +6,53 @@
     <title>My Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-
-            document.getElementById('contactForm').addEventListener('submit', function(event) {
+        document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
             event.preventDefault();
             
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            const statusElement = document.getElementById('formStatus');
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
             
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                statusElement.textContent = 'Please enter a valid email address.';
-                statusElement.style.color = 'red';
-                return;
-            }
             
-            // Construct mailto URL with form data
-            const mailtoUrl = `mailto:your.email@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
-                `Name: ${name}\nEmail: ${email}\n\n${message}`
+            // Show sending message
+            formStatus.textContent = "Sending message...";
+            formStatus.style.color = "#0066cc";
+            
+            // Simulate server request with timeout
+            setTimeout(function() {
+                // In a real implementation, you would check the server response
+                const success = true;
+                
+                if (success) {
+                    formStatus.textContent = "Message sent successfully!";
+                    formStatus.style.color = "green";
+                    contactForm.reset();
+                } else {
+                    formStatus.textContent = "Failed to send message. Please try again.";
+                    formStatus.style.color = "red";
+                }
+            }, 1500);
+            
+            // Alternative: Open email client with form data
+            // Uncomment this block if you prefer the mailto approach
+            
+            const mailtoUrl = `mailto:your.email@example.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+                `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
             )}`;
-            
-            // Open email client
             window.location.href = mailtoUrl;
             
-            // Show success message
-            statusElement.textContent = 'Opening your email client...';
-            statusElement.style.color = 'green';
-            
-            // Clear form
-            this.reset();
-            
-            // Alternative message if email client doesn't open automatically
-            setTimeout(() => {
-                statusElement.innerHTML = 'If your email client didn\'t open, please send an email directly';
-            }, 3000);
         });
-    
-
+    }
+});
     </script>
 </head>
 <body>
