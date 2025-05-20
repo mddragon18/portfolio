@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+
+            document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            const statusElement = document.getElementById('formStatus');
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                statusElement.textContent = 'Please enter a valid email address.';
+                statusElement.style.color = 'red';
+                return;
+            }
+            
+            // Construct mailto URL with form data
+            const mailtoUrl = `mailto:your.email@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+                `Name: ${name}\nEmail: ${email}\n\n${message}`
+            )}`;
+            
+            // Open email client
+            window.location.href = mailtoUrl;
+            
+            // Show success message
+            statusElement.textContent = 'Opening your email client...';
+            statusElement.style.color = 'green';
+            
+            // Clear form
+            this.reset();
+            
+            // Alternative message if email client doesn't open automatically
+            setTimeout(() => {
+                statusElement.innerHTML = 'If your email client didn\'t open, please send an email directly';
+            }, 3000);
+        });
+    
+
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">My Portfolio</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="https://www.linkedin.com/in/mohammed-oveaz-khan-8a020030a/">About</a></li>
+                    <li><a href="https://www.github.com/mddragon18">Projects</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Hi, I'm Oveaz</h1>
+            <p>I'm a student specializing in nothing.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <!-- <div class="about-image">
+                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQFlW164GQITiA/profile-displayphoto-shrink_800_800/B4EZUfH1IkHUAc-/0/1739983903790?e=1753315200&v=beta&t=_Gm4AyqCUZuA2HKqfRe_l8JW5q4Er5HmA0s7bjamX7s" alt="Profile Photo">
+                </div> -->
+                <div class="about-text">
+                    <p>Hello! I'm Oveaz, a student based in Bengaluru,India. I am learning blockchain security.</p>
+                    <p>When I'm not studying, you can find me in my college.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://coingeek.com/wp-content/uploads/2023/07/Stable-coin-jpg.webp" alt="Project 1" width="300px">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Stablecoin implementation</h3>
+                        <p>This is an implementation of a stablecoin. This is unaudited code. Do NOT use in production.</p>
+                        <div class="project-tags">
+                            <span class="tag">Solidity</span>
+                            <span class="tag">Foundry</span>
+                        </div>
+                        <a href="https://github.com/mddragon18/Stablecoin" class="btn">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPNYK52Ior_pqU_1Ls1oW2_NPrGN9TRlAXcQ&s" alt="Project 2">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Apple Clone</h3>
+                        <p>A clone of apple's website</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                        <a href="https://mddragon18.github.io/WebDev/Apple/index.html" class="btn">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://pixelplex.io/wp-content/uploads/2023/08/smart-contract-use-cases-main-1600.jpg" alt="Project 3" width="320px">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Smart Contract Audit reports</h3>
+                        <p>Collection of reports of the audits I have done.</p>
+                        <div class="project-tags">
+                            <span class="tag">Solidity</span>
+                            <span class="tag">Foundry</span>
+                            <span class="tag">Slither</span>
+                        </div>
+                        <a href="https://github.com/mddragon18/audit-reports-portfolio" class="btn">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <p>Feel free to reach out if you're looking for a auditor, have a question, or just want to connect.</p>
+                    <p><strong>Email:</strong> md.oveaz@proton.me</p>
+                    <p><strong>Location:</strong> Bengaluru, India</p>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <ul class="social-links">
+                <li><a href="https://www.linkedin.com/in/mohammed-oveaz-khan-8a020030a/">LinkedIn</a></li>
+                <li><a href="https://www.github.com/mddragon18">GitHub</a></li>
+            </ul>
+            <p>&copy; 2025 . All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
